@@ -83,14 +83,16 @@ describe("Gilded Rose", function () {
   });
 
   describe("Conjured Mana Cake case", () => {
-    const item = new Item("Conjured Mana Cake", 3, 6);
+    const item = new Item("Conjured Mana Cake", 3, 8);
     const gildedRose = new Shop([item]);
 
     test.each([
       /* day, expected sellIn, expected quality */
-      [0, 2, 4],
-      [1, 1, 2],
-      [2, 0, 0],
+      [0, 2, 6],
+      [1, 1, 4],
+      [2, 0, 2],
+      [3, -1, 0],
+      [4, -2, 0],
     ])(
       `day %d: sellIn equals %d and quality equals %d`,
       (day, expectedSellIn, expectedQuality) => {
@@ -113,7 +115,7 @@ describe("Gilded Rose", function () {
       [2, 2, 4],
       [3, 1, 3],
       [4, 0, 2],
-      [5, -1, 0],
+      [5, -1, 1],
       [6, -2, 0],
     ])(
       `day %d: sellIn equals %d and quality equals %d`,
