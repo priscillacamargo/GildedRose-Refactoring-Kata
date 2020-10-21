@@ -11,6 +11,43 @@ class Shop {
     this.items = items;
   }
 
+  increaseQuality(item) {
+    //inflationSpeed was define with scalability in mind, if future items inflate  faster or slower
+    //We can adjust the inflationSpeed and add another conditional rule
+    let inflationSpeed;
+
+    if (item.sellIn >= 5 && item.sellIn <= 10) inflationSpeed = 2;
+    if (item.sellIn < 5) inflationSpeed = 3;
+
+    item.quality = item.quality + inflationSpeed;
+
+    return item;
+  }
+
+  decreaseQuality(item) {
+    //degradationSpeed was define with scalability in mind, if future items degrade in a faster or slower ratio
+    //We can adjust the degradationSpeed and add another conditional rule
+    let degradationSpeed;
+    if (item.quality > 0 && item.sellIn >= 0) {
+      degradationSpeed = 1;
+    } else if (
+      (item.quality > 0 && item.sellIn === 0) ||
+      (item.quality > 0 && item.name.includes("Conjured"))
+    ) {
+      degradationSpeed = 2;
+    } else degradationSpeed = 0;
+
+    item.quality = degradationSpeed * (item.quality - 1);
+
+    return item;
+  }
+
+  legendaryItemsQuality(item) {
+    item.quality = 80;
+
+    return item;
+  }
+
   updateQuality() {
     if (this.items.length > 0) {
       this.items.forEach((item) => {
