@@ -25,8 +25,6 @@ class Shop {
     } else {
       item.quality = item.quality + inflationSpeed;
     }
-
-    return item;
   }
 
   decreaseQuality(item) {
@@ -44,14 +42,10 @@ class Shop {
     } else {
       item.quality = Math.abs(item.quality - degradationSpeed);
     }
-
-    return item;
   }
 
   legendaryItemsQuality(item) {
     item.quality = 80;
-
-    return item;
   }
 
   updateSellIn(item) {

@@ -3,7 +3,7 @@ export class Item {
   sellIn: number;
   quality: number;
 
-  constructor(name, sellIn, quality) {
+  constructor(name: string, sellIn: number, quality: number) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
@@ -17,10 +17,10 @@ export class GildedRose {
     this.items = items;
   }
 
-  increaseQuality(item) {
+  increaseQuality(item: Item): void {
     //inflationSpeed was define with scalability in mind, if future items inflate  faster or slower
     //We can adjust the inflationSpeed and add another conditional rule
-    let inflationSpeed;
+    let inflationSpeed: number;
 
     if (item.sellIn >= 5 && item.sellIn <= 10) inflationSpeed = 2;
     if (item.sellIn < 5 && item.sellIn > 0) inflationSpeed = 3;
@@ -31,14 +31,12 @@ export class GildedRose {
     } else {
       item.quality = item.quality + inflationSpeed;
     }
-
-    return item;
   }
 
-  decreaseQuality(item) {
+  decreaseQuality(item: Item): void {
     //degradationSpeed was define with scalability in mind, if future items degrade in a faster or slower ratio
     //We can adjust the degradationSpeed and add another conditional rule
-    let degradationSpeed;
+    let degradationSpeed: number;
     const isConjured = item.name.toLowerCase().includes("conjured");
 
     if (item.quality > 0 && item.sellIn >= 0 && !isConjured)
@@ -50,22 +48,18 @@ export class GildedRose {
     } else {
       item.quality = Math.abs(item.quality - degradationSpeed);
     }
-
-    return item;
   }
 
-  legendaryItemsQuality(item) {
+  legendaryItemsQuality(item: Item): void {
     item.quality = 80;
-
-    return item;
   }
 
-  updateSellIn(item) {
+  updateSellIn(item: Item): void {
     if (item.name !== "Sulfuras, Hand of Ragnaros")
       item.sellIn = item.sellIn - 1;
   }
 
-  updateQuality() {
+  updateQuality(): Item[] {
     if (this.items.length > 0) {
       this.items.forEach((item) => {
         switch (item.name) {
