@@ -39,10 +39,13 @@ export class GildedRose {
     let degradationSpeed: number;
     const isConjured = item.name.toLowerCase().includes("conjured");
 
-    if (item.quality > 1 && item.sellIn >= 0 && !isConjured)
-      degradationSpeed = 1;
-    if (item.quality > 1 && isConjured) degradationSpeed = 2;
-    if (item.quality > 1 && item.sellIn < 0) degradationSpeed = 2;
+    if (item.quality > 1) {
+      if (item.sellIn >= 0 && !isConjured) {
+        degradationSpeed = 1;
+      } else if (isConjured || item.sellIn < 0) {
+        degradationSpeed = 2;
+      }
+    }
 
     if (item.quality <= 1) {
       item.quality = 0;
